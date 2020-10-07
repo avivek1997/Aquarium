@@ -12,27 +12,31 @@ BlynkTimer timer;
 
 WidgetRTC rtc;
 
-void clockDisplay()
+void updateBlynk()
 {
   // You can call hour(), minute(), ... at any time
   // Please see Time library examples for details
 
   String currentTime = String(hour()) + ":" + minute() + ":" + second();
-  String currentDate = String(day()) + " " + month() + " " + year();
-  Serial.print("Current time: ");
-  Serial.print(currentTime);
-  Serial.print(" ");
-  Serial.print(currentDate);
-  Serial.println();
-  temperatureSensor.requestTemperatures();
-  float tempC = temperatureSensor.getTempCByIndex(0);
-  currentTime += " -> " + String(tempC);
+  // Serial.print("Current time: ");
+  // Serial.print(currentTime);
+  // Serial.print(" ");
+  // Serial.print(currentDate);
+  // Serial.println();
   // Send time to the App
-  Blynk.virtualWrite(V1, currentTime);
+  Blynk.virtualWrite(V2, light.currentState);
+  Blynk.virtualWrite(V3, outdoorLight.currentState);
+  
   // Send date to the App
   //Blynk.virtualWrite(V2, currentDate);
 }
-
+void updateTemperature()
+{
+  temperatureSensor.requestTemperatures();
+  float tempC = temperatureSensor.getTempCByIndex(0);
+  String s += " -> " + String(tempC) + " 'C";
+  Blynk.virtualWrite(V1, s);
+}
 BLYNK_WRITE(V2)
 {
   int state=param.asInt();

@@ -59,11 +59,13 @@ void setup()
   InitializeOTA();
   Blynk.begin(auth, ssid, password);
   setSyncInterval(10 * 60); // Sync interval in seconds (10 minutes)
-  timer.setInterval(10000L, clockDisplay);
+  timer.setInterval(5000L, updateBlynk);
+  timer.setInterval(5000L, updateTemperature);
   Serial.println("Ready");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
   HandleLights(false);
+  Blynk.syncAll();
 }
 
 void loop()
