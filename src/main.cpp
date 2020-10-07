@@ -4,16 +4,17 @@
 #include <ESPServo.h>
 
 #define Light_Pin D7
-#define Heater_Pin D8
+#define Filter_Pin D8
 #define Relay1_Pin D0
 #define Relay2_Pin 10
 OutputDevice light(Light_Pin, "Light", 0);
 OutputDevice outdoorLight(Relay1_Pin, "Out Door Light", 0);
+OutputDevice filter(Filter_Pin, "Filter", 0);
 const char *ssid = "Vivek1";
 const char *password = "vivek2271146";
 #include <Blynk.h>
 
-BLYNK_WRITE(V4)
+BLYNK_WRITE(V5)
 {
   myServo.write(param.asInt());
   Blynk.virtualWrite(V1, param.asInt());
@@ -50,6 +51,7 @@ void setup()
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   temperatureSensor.begin();
+  filter.SetOn();  
   while (WiFi.waitForConnectResult() != WL_CONNECTED)
   {
     Serial.println("Wifi Connection Failed! Rebooting...");

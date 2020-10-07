@@ -47,6 +47,11 @@ BLYNK_WRITE(V3)
   int state=param.asInt();
   state ? outdoorLight.SetOn() : outdoorLight.SetOff();
 }
+BLYNK_WRITE(V4)
+{
+  int state=param.asInt();
+  state ? filter.SetOn() : filter.SetOff();
+}
 
 BLYNK_CONNECTED() {
   // Synchronize time on connection
