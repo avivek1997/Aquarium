@@ -66,8 +66,7 @@ void setup()
   Serial.println("Ready");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-  HandleLights(false);
-  Blynk.syncAll();
+  //HandleLights(false);
 }
 
 void loop()
@@ -75,6 +74,6 @@ void loop()
   ArduinoOTA.handle();
   Blynk.run();
   timer.run();
-  HandleLights(true);
+  //HandleLights(true);
 }
 

@@ -24,9 +24,10 @@ void updateBlynk()
   // Serial.print(currentDate);
   // Serial.println();
   // Send time to the App
+  Blynk.virtualWrite(V1, currentTime);
   Blynk.virtualWrite(V2, light.currentState);
   Blynk.virtualWrite(V3, outdoorLight.currentState);
-  
+  Blynk.virtualWrite(V4, filter.currentState);
   // Send date to the App
   //Blynk.virtualWrite(V2, currentDate);
 }
@@ -34,7 +35,7 @@ void updateTemperature()
 {
   temperatureSensor.requestTemperatures();
   float tempC = temperatureSensor.getTempCByIndex(0);
-  String s += " -> " + String(tempC) + " 'C";
+  String s = " -> " + String(tempC) + " 'C";
   Blynk.virtualWrite(V1, s);
 }
 BLYNK_WRITE(V2)
@@ -55,5 +56,6 @@ BLYNK_WRITE(V4)
 
 BLYNK_CONNECTED() {
   // Synchronize time on connection
+  Blynk.syncAll();
   rtc.begin();
 }
