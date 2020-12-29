@@ -7,6 +7,7 @@
 #define Filter_Pin D8
 #define Relay1_Pin D0
 #define Relay2_Pin 10
+
 OutputDevice light(Light_Pin, "Light", 0);
 OutputDevice outdoorLight(Relay1_Pin, "Out Door Light", 0);
 OutputDevice filter(Filter_Pin, "Filter", 0);
@@ -56,7 +57,7 @@ void setup()
   {
     Serial.println("Wifi Connection Failed! Rebooting...");
     delay(5000);
-    ESP.restart();
+    setup();
   }
   InitializeOTA();
   Blynk.begin(auth, ssid, password);
