@@ -2,6 +2,7 @@
 #include <OTA.h>
 #include <OutputDevices.h>
 #include <ESPServo.h>
+#include <ArduinoJson.h>
 
 #define Light_Pin D7
 #define Filter_Pin D8
